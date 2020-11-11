@@ -22,12 +22,35 @@ public class MyDemoLoggingAspects {
 	// Modifier is optional
 	// @Before("execution (* add*())")
 
-	@Pointcut("execution(* add*())")
+	@Pointcut("execution(* add*(..))")
 	private void forDAOPackage() {
+	}
+
+	@Pointcut("execution(* set*())")
+	private void forSetters() {
+	}
+
+	@Pointcut("execution(* get*())")
+	private void forGetters() {
+	}
+
+	@Pointcut("forDAOPackage() && !(forSetters() || forGetters() ) ")
+	private void combinational() {
+
+	}
+
+	@Before("combinational()")
+	public void auditLog() {
+		System.out.println("\n========>> AuditLog");
 	}
 
 	@Before("forDAOPackage()")
 	public void userLogging() {
 		System.out.println("\n========>> @Before advice on addAccount is called");
+	}
+
+	@Before("forDAOPackage()")
+	public void performAPITesting() {
+		System.out.println("\n========>> Performing API Analytics");
 	}
 }
