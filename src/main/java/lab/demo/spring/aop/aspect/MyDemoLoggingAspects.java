@@ -3,10 +3,12 @@ package lab.demo.spring.aop.aspect;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+@Order(value = 2)
 public class MyDemoLoggingAspects {
 
 	// Match on Method names
@@ -23,7 +25,7 @@ public class MyDemoLoggingAspects {
 	// @Before("execution (* add*())")
 
 	@Pointcut("execution(* add*(..))")
-	private void forDAOPackage() {
+	public void forDAOPackage() {
 	}
 
 	@Pointcut("execution(* set*())")
@@ -35,22 +37,13 @@ public class MyDemoLoggingAspects {
 	}
 
 	@Pointcut("forDAOPackage() && !(forSetters() || forGetters() ) ")
-	private void combinational() {
+	public void combinational() {
 
 	}
 
 	@Before("combinational()")
 	public void auditLog() {
-		System.out.println("\n========>> AuditLog");
+		System.out.println("========>> AuditLog- Order 2");
 	}
 
-	@Before("forDAOPackage()")
-	public void userLogging() {
-		System.out.println("\n========>> @Before advice on addAccount is called");
-	}
-
-	@Before("forDAOPackage()")
-	public void performAPITesting() {
-		System.out.println("\n========>> Performing API Analytics");
-	}
 }
