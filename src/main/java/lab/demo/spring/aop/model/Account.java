@@ -4,6 +4,15 @@ public class Account {
 	private int id;
 	private String name;
 
+	public Account() {
+
+	}
+
+	public Account(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	public int getId() {
 		System.out.println("Getter Id- " + id);
 		return id;
@@ -22,6 +31,11 @@ public class Account {
 	public void setName(String name) {
 		System.out.println("Setter name: " + name);
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", name=" + name + "]";
 	}
 
 }

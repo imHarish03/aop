@@ -15,16 +15,17 @@ public class SpringBootAopApplication {
 		Account account = new Account();
 		account.setId(1);
 		account.setName("Test");
-
 		accountDAO.addAccount(account);
 
 		System.out.println("\n Calling again");
-		
+
 		Account account2 = new Account();
 		account2.setId(2);
 		account2.setName("inter");
-
 		accountDAO.addAccount(account2);
+
+		// Fetch Info
+		System.out.println(accountDAO.getAccounts());
 
 		context.close();
 
