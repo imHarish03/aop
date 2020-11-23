@@ -1,10 +1,13 @@
 package lab.demo.spring.aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import lab.demo.spring.aop.model.Account;
 
 @Aspect
 @Component
@@ -42,8 +45,15 @@ public class MyDemoLoggingAspects {
 	}
 
 	@Before("combinational()")
-	public void auditLog() {
+	public void auditLog(JoinPoint joinPoint) {
 		System.out.println("========>> AuditLog- Order 2");
+		System.out.println(joinPoint.getSignature());
+
+		for (Object temp : joinPoint.getArgs()) {
+			if (temp instanceof Account) {
+				System.out.println("Account Holder Name " + temp.toString());
+			}
+		}
 	}
 
 }
