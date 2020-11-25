@@ -15,6 +15,10 @@ public class AccountDAO {
 	}
 
 	public List<Account> getAccounts() {
+
+		if (true)
+			throw new RuntimeException();
+
 		List<Account> accountList = new ArrayList<Account>();
 		accountList.add(new Account(1, "Hari"));
 		accountList.add(new Account(2, "Saurabh"));

@@ -25,7 +25,11 @@ public class SpringBootAopApplication {
 		accountDAO.addAccount(account2);
 
 		// Fetch Info
-		System.out.println(accountDAO.getAccounts());
+		try {
+			System.out.println(accountDAO.getAccounts());
+		} catch (Exception e) {
+			System.out.println("Hadnling exceptuonin main block" + e);
+		}
 
 		context.close();
 

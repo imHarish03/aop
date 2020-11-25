@@ -1,6 +1,8 @@
 package lab.demo.spring.aop.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -54,6 +56,15 @@ public class MyDemoLoggingAspects {
 				System.out.println("Account Holder Name " + temp.toString());
 			}
 		}
+	}
+
+	@AfterThrowing(pointcut = "execution( *  *(..))", throwing = "theExcep")
+	public void afterThrowingExceptions(JoinPoint joinPoint, Throwable theExcep) {
+
+		System.out.println("Capture exceptiosm via Aspect");
+		System.out.println(joinPoint.getSignature());
+		System.out.println(theExcep);
+
 	}
 
 }
