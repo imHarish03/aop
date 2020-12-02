@@ -1,7 +1,7 @@
 package lab.demo.spring.aop.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -15,6 +15,13 @@ import lab.demo.spring.aop.model.Account;
 @Component
 @Order(value = 2)
 public class MyDemoLoggingAspects {
+
+	@After("execution( *  *(..))")
+	public void after(JoinPoint joinPoint) {
+
+		System.out.println("\n ==>> Checking the After Aspects");
+		System.out.println(joinPoint.getSignature());
+	}
 
 	// Match on Method names
 	// @Before("execution (public void
@@ -64,7 +71,6 @@ public class MyDemoLoggingAspects {
 		System.out.println("Capture exceptiosm via Aspect");
 		System.out.println(joinPoint.getSignature());
 		System.out.println(theExcep);
-
 	}
 
 }
